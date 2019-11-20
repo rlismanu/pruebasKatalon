@@ -18,8 +18,7 @@
 	       
 	</properties>
 	
-	<dependencies>
-	   	
+	<dependencies>	   	
 	   
 	   	<dependency>
 	     	<groupId>org.seleniumhq.selenium</groupId>
@@ -32,7 +31,6 @@
 		    <artifactId>selenium-htmlunit-driver</artifactId>
 		    <version>2.36.0</version>
 		</dependency>
-
 		
 		<dependency>
 		    <groupId>junit</groupId>
@@ -56,10 +54,10 @@
 	        
 	        <resources>
 	      		<resource>
-		        <directory>src/test/PruebasKatalon.katalon</directory>
-			    <includes>
-			        <include>**/com.*.java</include>
-		        </includes>
+			        <directory>src/test/**</directory>
+				    <includes>
+				        <include>**/com.*.java</include>
+			        </includes>
 	        	</resource>    
 	     	</resources>
 	 </build>

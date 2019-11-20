@@ -49,26 +49,20 @@ public class PruebaTest {
 		 */
 		// System.setProperty("webdriver.firefox.driver", "geckodriver.exe");
 		// driver = new FirefoxDriver();
-		
-		//this.driver = new HtmlUnitDriver();
-		
+
+		// this.driver = new HtmlUnitDriver();
+
 		baseUrl = "https://www.katalon.com/";
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
-	
-	
+
 	@Test
 	public void testLoginOK() throws Exception {
-		
 		driver.get("https://www.google.es/");
-		//this.takeSnapShot(driver, "evidencias/test1.png");
-
 		driver.findElement(By.name("q")).clear();
 		driver.findElement(By.name("q")).sendKeys("pc");
-
-		//this.takeSnapShot(driver, "C:\\Users\\rlismanu\\Desktop\\test2.png");
 		driver.findElement(By.name("q")).sendKeys(Keys.ENTER);
-
+		
 	}
 
 	@After
@@ -112,14 +106,4 @@ public class PruebaTest {
 			acceptNextAlert = true;
 		}
 	}
-
-	public static void takeSnapShot(WebDriver webdriver, String fileWithPath) throws Exception {
-		
-		TakesScreenshot scrShot = ((TakesScreenshot) webdriver);
-		File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
-		File DestFile = new File(fileWithPath);
-		FileUtils.copyFile(SrcFile, DestFile);
-
-	}
-
 }
