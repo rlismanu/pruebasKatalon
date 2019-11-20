@@ -18,13 +18,19 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 public class PruebaTest {
-	private WebDriver driver;
+	private WebDriver eventFiring;
 	private String baseUrl;
+	private EventListener event;
+	private EventFiringWebDriver driver;
 	private boolean acceptNextAlert = true;
 	private StringBuffer verificationErrors = new StringBuffer();
+
+	private static String resurso = "";
 
 	@Before
 	public void setUp() throws Exception {
@@ -33,7 +39,7 @@ public class PruebaTest {
 		 */
 
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-		driver = new ChromeDriver();
+		eventFiring = new ChromeDriver();
 
 		/**
 		 * Cofiguración Internet Explorer
@@ -47,22 +53,38 @@ public class PruebaTest {
 		/**
 		 * Configuración Firefox
 		 */
-		// System.setProperty("webdriver.firefox.driver", "geckodriver.exe");
-		// driver = new FirefoxDriver();
+		//System.setProperty("webdriver.firefox.driver", "geckodriver.exe");
+		//driver = new FirefoxDriver();
 
-		// this.driver = new HtmlUnitDriver();
+		
+		this.driver = new EventFiringWebDriver(this.eventFiring);
+		this.event = new EventListener();
+		
+		this.driver.register(event);
 
 		baseUrl = "https://www.katalon.com/";
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		this.driver.manage().window().maximize();
 	}
 
 	@Test
-	public void testLoginOK() throws Exception {
+	public void testgitHubOK() throws Exception {
 		driver.get("https://www.google.es/");
-		driver.findElement(By.name("q")).clear();
-		driver.findElement(By.name("q")).sendKeys("pc");
-		driver.findElement(By.name("q")).sendKeys(Keys.ENTER);
-		
+	    driver.findElement(By.name("q")).click();
+	    driver.findElement(By.name("q")).clear();
+	    driver.findElement(By.name("q")).sendKeys("github");
+	    driver.findElement(By.name("q")).sendKeys(Keys.ENTER);
+	    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Resultado web con enlaces al sitio web'])[1]/following::span[1]")).click();
+	}
+	
+	@Test
+	public void testfacebookOK() throws Exception {
+		driver.get("https://www.google.es/");
+	    driver.findElement(By.name("q")).click();
+	    driver.findElement(By.name("q")).clear();
+	    driver.findElement(By.name("q")).sendKeys("facebook");
+	    driver.findElement(By.name("q")).sendKeys(Keys.ENTER);
+	    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Anuncio'])[1]/following::span[1]")).click();
+	  
 	}
 
 	@After
@@ -105,5 +127,17 @@ public class PruebaTest {
 		} finally {
 			acceptNextAlert = true;
 		}
+	}
+
+	private static void takeSnapShot(WebDriver webdriver, String fileWithPath) throws Exception {		
+
+		TakesScreenshot scrShot = ((TakesScreenshot) webdriver);
+		
+		File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
+	
+		File DestFile = new File(fileWithPath); 
+		
+		FileUtils.copyFile(SrcFile, DestFile);
+
 	}
 }
