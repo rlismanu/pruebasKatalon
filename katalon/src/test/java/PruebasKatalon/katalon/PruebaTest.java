@@ -53,13 +53,12 @@ public class PruebaTest {
 		/**
 		 * Configuración Firefox
 		 */
-		//System.setProperty("webdriver.firefox.driver", "geckodriver.exe");
-		//driver = new FirefoxDriver();
+		// System.setProperty("webdriver.firefox.driver", "geckodriver.exe");
+		// driver = new FirefoxDriver();
 
-		
 		this.driver = new EventFiringWebDriver(this.eventFiring);
 		this.event = new EventListener();
-		
+
 		this.driver.register(event);
 
 		baseUrl = "https://www.katalon.com/";
@@ -69,22 +68,26 @@ public class PruebaTest {
 	@Test
 	public void testgitHubOK() throws Exception {
 		driver.get("https://www.google.es/");
-	    driver.findElement(By.name("q")).click();
-	    driver.findElement(By.name("q")).clear();
-	    driver.findElement(By.name("q")).sendKeys("github");
-	    driver.findElement(By.name("q")).sendKeys(Keys.ENTER);
-	    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Resultado web con enlaces al sitio web'])[1]/following::span[1]")).click();
+		driver.findElement(By.name("q")).click();
+		driver.findElement(By.name("q")).clear();
+		driver.findElement(By.name("q")).sendKeys("github");
+		driver.findElement(By.name("q")).sendKeys(Keys.ENTER);
+		driver.findElement(By.xpath(
+				"(.//*[normalize-space(text()) and normalize-space(.)='Resultado web con enlaces al sitio web'])[1]/following::span[1]"))
+				.click();
 	}
-	
+
 	@Test
 	public void testfacebookOK() throws Exception {
 		driver.get("https://www.google.es/");
-	    driver.findElement(By.name("q")).click();
-	    driver.findElement(By.name("q")).clear();
-	    driver.findElement(By.name("q")).sendKeys("facebook");
-	    driver.findElement(By.name("q")).sendKeys(Keys.ENTER);
-	    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Anuncio'])[1]/following::span[1]")).click();
-	  
+		driver.findElement(By.name("q")).click();
+		driver.findElement(By.name("q")).clear();
+		driver.findElement(By.name("q")).sendKeys("facebook");
+		driver.findElement(By.name("q")).sendKeys(Keys.ENTER);
+		driver.findElement(
+				By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Anuncio'])[1]/following::span[1]"))
+				.click();
+
 	}
 
 	@After
@@ -129,15 +132,4 @@ public class PruebaTest {
 		}
 	}
 
-	private static void takeSnapShot(WebDriver webdriver, String fileWithPath) throws Exception {		
-
-		TakesScreenshot scrShot = ((TakesScreenshot) webdriver);
-		
-		File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
-	
-		File DestFile = new File(fileWithPath); 
-		
-		FileUtils.copyFile(SrcFile, DestFile);
-
-	}
 }

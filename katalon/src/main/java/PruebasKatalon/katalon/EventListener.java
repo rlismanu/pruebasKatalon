@@ -20,15 +20,16 @@ public class EventListener extends AbstractWebDriverEventListener {
 	public void beforeClickOn(WebElement webElement, WebDriver driver) {
 		this.numeroEvidencia++;
 		try {
-			/* Take screenshot when exception happened. */
+			
 			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-			/* save screenshot to file. */
+			
 			FileUtils.copyFile(scrFile, new File("evidencias/EV_0" + this.numeroEvidencia + ".png"));
+			
 		} catch (IOException ex) {
 
 			ex.printStackTrace();
 
 		}
-	}
+	} 
 
 }
